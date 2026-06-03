@@ -582,6 +582,22 @@ h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;col
   color:var(--gold);font-family:'DM Mono',monospace;
   font-size:.78rem;padding:.3rem .8rem;border-radius:3px;margin-bottom:1.5rem;
 }
+.ss-note{margin-top:1.5rem;border:1px solid rgba(255,215,0,.25);border-radius:var(--radius);background:rgba(255,215,0,.06);}
+.ss-note summary{
+  cursor:pointer;list-style:none;
+  padding:.7rem 1rem;font-size:.82rem;font-weight:500;
+  color:var(--gold);display:flex;align-items:center;gap:8px;
+}
+.ss-note summary::-webkit-details-marker{display:none;}
+.ss-note summary::before{content:'🛡️';font-size:.95rem;}
+.ss-note summary::after{content:'+';margin-left:auto;font-size:1.1rem;color:var(--gold);}
+.ss-note[open] summary::after{content:'−';}
+.ss-note-body{padding:0 1rem 1rem;font-size:.85rem;color:rgba(245,240,232,.6);line-height:1.7;}
+.ss-note-body p{margin-bottom:.6rem;color:rgba(245,240,232,.6);}
+.ss-note-body strong{color:var(--paper);}
+.ss-note-body ol{margin:0 0 .6rem 1.1rem;display:flex;flex-direction:column;gap:.35rem;}
+.ss-note-foot{font-size:.8rem;color:rgba(245,240,232,.4) !important;}
+.ss-note-foot a{color:var(--gold);}
 .sys-reqs{padding:3rem;background:var(--paper-dark);}
 .sys-reqs h3{margin-bottom:1.5rem;}
 .req-list{list-style:none;}
@@ -1037,6 +1053,18 @@ footer{
       <p>Um arquivo .exe. Instala em segundos como qualquer programa. Sem Python instalado, sem dependências externas — tudo já incluso.</p>
       <a href="https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.0.0.exe" class="btn-primary" style="display:inline-flex;width:fit-content;">↓ Baixar Sigen HQ</a>
       <p style="margin-top:1rem;font-size:.8rem;color:rgba(245,240,232,.25);">Requer Windows 10 ou 11 · 64-bit</p>
+      <details class="ss-note">
+        <summary>O Windows bloqueou a instalação? É normal — veja como prosseguir</summary>
+        <div class="ss-note-body">
+          <p>Por ser um programa novo de um desenvolvedor independente, o <strong>Windows Defender SmartScreen</strong> pode exibir um aviso azul de "Fornecedor desconhecido". <strong>Não é vírus</strong> — é só porque o instalador ainda é recente. Para instalar:</p>
+          <ol>
+            <li>Na janela "O Windows protegeu o computador", clique em <strong>Mais informações</strong>.</li>
+            <li>Aparecerá o botão <strong>Executar assim mesmo</strong> — clique nele.</li>
+            <li>A instalação segue normalmente.</li>
+          </ol>
+          <p class="ss-note-foot">Em caso de dúvida, fale com a gente em <strong>sigenhq@zohomail.com</strong>.</p>
+        </div>
+      </details>
     </div>
     <div class="sys-reqs">
       <h3>Requisitos do sistema</h3>
@@ -1118,6 +1146,21 @@ footer{
         <strong>4.</strong> Cole a chave em <strong>Ajuda → Ativar Licença</strong> e pronto — a versão completa é liberada, sem limite de edições.
         <br><br>
         A mesma licença pode ser ativada em <strong>até 2 computadores</strong>. A ativação funciona offline depois de feita.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">O Windows bloqueou a instalação ("Fornecedor desconhecido"). É vírus? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Não, não é vírus. Esse aviso azul é do <strong>Windows Defender SmartScreen</strong> e aparece em todo programa novo de desenvolvedor independente que ainda não acumulou histórico de downloads — não tem relação com o conteúdo do arquivo.
+        <br><br>
+        Para instalar mesmo assim:
+        <br><br>
+        <strong>1.</strong> Na janela "O Windows protegeu o computador", clique em <strong>Mais informações</strong>.<br>
+        <strong>2.</strong> Vai aparecer o botão <strong>Executar assim mesmo</strong> — clique nele.<br>
+        <strong>3.</strong> A instalação segue normalmente.
+        <br><br>
+        Conforme mais pessoas baixam e instalam, o aviso tende a desaparecer sozinho.
       </div></div>
     </div>
 
