@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sigen HQ — Catalogador de Quadrinhos para Windows</title>
+<meta name="description" content="O software mais completo para catalogar sua coleção de HQs. Prateleira visual, dashboard, importação de dados da web, exportação PDF e muito mais. Para Windows, sem assinatura.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0f0e0d;
+  --paper:#f5f0e8;
+  --paper-dark:#ece5d6;
+  --red:#c8261a;
+  --red-dark:#9e1c12;
+  --gold:#ffd700;
+  --gold-dim:#c9a800;
+  --blue:#1565c0;
+  --blue-light:#e3f2fd;
+  --text:#1a1714;
+  --muted:#6b6256;
+  --border:rgba(15,14,13,0.13);
+  --radius:4px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%230f0e0d' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,5vw,4rem);
+  height:56px;
+  border-bottom:3px solid var(--red);
+}
+
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.6rem;color:var(--paper);
+  letter-spacing:.05em;text-decoration:none;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo-icon{
+  width:28px;height:28px;
+  background:var(--gold);
+  border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--ink);font-weight:700;
+}
+.nav-logo span{color:var(--red);}
+
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links a{
+  color:rgba(245,240,232,.6);text-decoration:none;
+  font-size:.82rem;font-weight:500;letter-spacing:.05em;
+  text-transform:uppercase;transition:color .2s;
+}
+.nav-links a:hover{color:var(--paper);}
+.nav-cta{
+  background:var(--red) !important;
+  color:var(--paper) !important;
+  padding:.4rem 1.1rem;border-radius:var(--radius);
+  transition:background .2s !important;
+}
+.nav-cta:hover{background:var(--red-dark) !important;}
+
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;background:none;border:none;padding:4px;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--paper);border-radius:2px;}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  min-height:calc(100vh - 56px);
+  display:flex;align-items:center;
+  padding:clamp(3rem,8vw,6rem) clamp(1.5rem,5vw,4rem);
+  overflow:hidden;
+  background:var(--ink);
+}
+
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(200,38,26,.15) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.7;
+}
+
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(255,215,0,.06) 0%,transparent 70%);
+  top:50%;right:10%;transform:translateY(-50%);
+  pointer-events:none;
+}
+
+.hero-content{position:relative;z-index:2;max-width:580px;}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,215,0,.1);
+  border:1px solid rgba(255,215,0,.25);
+  color:var(--gold);
+  font-size:.72rem;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;padding:.35rem .9rem;
+  border-radius:2px;margin-bottom:1.5rem;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;background:var(--gold);
+  border-radius:50%;animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.8rem,8.5vw,7rem);
+  line-height:.93;color:var(--paper);
+  letter-spacing:.02em;margin-bottom:.4em;
+}
+h1 .accent{color:var(--red);}
+h1 .gold{color:var(--gold);}
+h1 .outline{-webkit-text-stroke:2px var(--paper);color:transparent;}
+
+.hero-sub{
+  font-size:1.05rem;color:rgba(245,240,232,.6);
+  margin-bottom:2.5rem;max-width:460px;
+  font-weight:300;line-height:1.75;
+}
+
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}
+
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--red);color:var(--paper);
+  text-decoration:none;font-weight:500;font-size:.95rem;
+  padding:.85rem 2rem;border-radius:var(--radius);
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;letter-spacing:.02em;
+}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-primary:active{transform:translateY(0);}
+
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  color:rgba(245,240,232,.6);text-decoration:none;
+  font-size:.9rem;padding:.85rem 0;transition:color .2s;
+}
+.btn-ghost:hover{color:var(--paper);}
+
+.hero-stats{
+  display:flex;gap:2.5rem;
+  margin-top:3rem;padding-top:2rem;
+  border-top:1px solid rgba(245,240,232,.1);
+  flex-wrap:wrap;
+}
+.hero-stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;color:var(--gold);display:block;line-height:1;
+}
+.hero-stat-label{font-size:.72rem;color:rgba(245,240,232,.4);text-transform:uppercase;letter-spacing:.08em;}
+
+/* ── PRATELEIRA HERO ── */
+.hero-shelf{
+  position:absolute;right:0;top:0;bottom:0;width:44%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(135deg,#1a2035 0%,#0d1520 100%);
+  clip-path:polygon(9% 0,100% 0,100% 100%,0% 100%);
+}
+
+.shelf-wrap{
+  padding:2rem 3rem 2rem 7rem;
+  width:100%;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+.shelf-ui{
+  background:#2a1f14;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:-20px 20px 60px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.06);
+  max-width:360px;
+}
+
+.shelf-titlebar{
+  background:#1a1208;padding:8px 12px;
+  display:flex;align-items:center;gap:7px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.shelf-dot{width:9px;height:9px;border-radius:50%;}
+.shelf-dot:nth-child(1){background:#ff5f57;}
+.shelf-dot:nth-child(2){background:#ffbd2e;}
+.shelf-dot:nth-child(3){background:#28ca41;}
+.shelf-appname{font-size:10px;color:rgba(255,255,255,.25);margin-left:6px;font-family:'DM Mono',monospace;}
+
+.shelf-body{display:flex;height:240px;}
+
+.shelf-sidebar{
+  width:110px;background:#1c1208;
+  padding:10px 8px;
+  border-right:1px solid rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.shelf-serie{
+  font-size:9px;font-family:'DM Mono',monospace;
+  color:rgba(255,255,255,.25);
+  padding:4px 6px;border-radius:3px;
+  margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.shelf-serie.active{background:rgba(200,38,26,.25);color:#f08070;}
+.shelf-serie.gold{color:var(--gold);opacity:.7;}
+
+.shelf-main{flex:1;padding:8px;background:#241a0e;position:relative;}
+
+.shelf-row{
+  display:flex;align-items:flex-end;gap:3px;
+  padding:4px 0;
+  border-bottom:3px solid #3d2a15;
+  margin-bottom:2px;
+}
+.shelf-book{
+  width:28px;height:42px;border-radius:2px;flex-shrink:0;
+  position:relative;
+}
+.shelf-book::after{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.3) 0%,transparent 30%);
+  border-radius:2px;
+}
+.b1{background:linear-gradient(160deg,#d32f2f,#7f1c15);}
+.b2{background:linear-gradient(160deg,#1565c0,#0d3b7a);}
+.b3{background:linear-gradient(160deg,#2e7d32,#145a32);}
+.b4{background:linear-gradient(160deg,#6a1b9a,#38006b);}
+.b5{background:linear-gradient(160deg,#e65100,#7c2900);}
+.b6{background:linear-gradient(160deg,#00695c,#003d33);}
+.b7{background:linear-gradient(160deg,#c62828,#7b1313);}
+.b8{background:linear-gradient(160deg,#37474f,#1c2f38);}
+.b9{background:linear-gradient(160deg,#f9a825,#b37a00);}
+.b10{background:linear-gradient(160deg,#1a237e,#0d1257);}
+.b-ghost{background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.1);}
+
+.shelf-statusbar{
+  background:#1a1208;padding:5px 10px;
+  display:flex;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.shelf-stat{font-size:8px;color:rgba(255,255,255,.25);font-family:'DM Mono',monospace;}
+.shelf-stat span{color:var(--gold);}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1;padding:clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem);}
+
+.section-label{
+  font-size:.72rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red);margin-bottom:.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::before{content:'';display:block;width:24px;height:2px;background:var(--red);}
+
+h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,5vw,3.8rem);
+  line-height:1;letter-spacing:.02em;
+  margin-bottom:.5em;color:var(--ink);
+}
+
+h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;color:var(--ink);margin-bottom:.5rem;}
+
+/* ── FEATURES GRID ── */
+.features-section{background:var(--paper-dark);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+
+.features-intro{max-width:580px;color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:3rem;}
+
+.features-tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);overflow-x:auto;margin-bottom:0;}
+.ftab{
+  background:none;border:none;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;
+  color:var(--muted);padding:.9rem 1.4rem;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;
+  transition:color .2s,border-color .2s;
+}
+.ftab.active{color:var(--red);border-bottom-color:var(--red);}
+.ftab:hover:not(.active){color:var(--text);}
+
+.features-panel{display:none;}
+.features-panel.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border:2px solid var(--ink);border-top:none;}
+
+.feat-card{
+  padding:1.75rem;
+  border-right:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  background:var(--paper);
+  transition:background .2s;
+}
+.feat-card:hover{background:var(--gold);}
+
+.feat-icon{
+  width:40px;height:40px;background:var(--ink);border-radius:var(--radius);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1rem;font-size:1.1rem;
+}
+.feat-card p{font-size:.88rem;color:var(--muted);line-height:1.6;margin-top:.4rem;}
+
+/* ── SCREENSHOTS ── */
+.screenshots-section{background:var(--paper-dark);}
+.screenshots-section h2,.screenshots-section .section-label{color:var(--ink);}
+.screenshots-section .section-label{color:var(--red);}
+.screenshots-section .section-label::before{background:var(--red);}
+.screenshots-section p{color:var(--muted);font-size:.95rem;line-height:1.7;max-width:580px;margin-bottom:2rem;}
+
+.ss-tabs{
+  display:flex;gap:0;border-bottom:2px solid var(--ink);
+  overflow-x:auto;margin-bottom:2rem;
+}
+.sstab{
+  background:none;border:none;
+  color:var(--muted);
+  font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;
+  padding:.85rem 1.4rem;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;
+  transition:color .2s,border-color .2s;
+}
+.sstab.active{color:var(--red);border-bottom-color:var(--red);}
+.sstab:hover:not(.active){color:var(--text);}
+
+.ss-panel{display:none;}
+.ss-panel.active{display:block;}
+
+.ss-real-img{
+  border-radius:8px;overflow:hidden;
+  border:2px solid var(--border);
+  box-shadow:0 8px 40px rgba(0,0,0,.15);
+  line-height:0;
+}
+.ss-real-img img{
+  width:100%;height:auto;display:block;
+}
+.ss-real-img--narrow{max-width:560px;}
+.ss-caption{
+  font-size:.8rem;color:var(--muted);
+  margin-top:.75rem;font-family:'DM Mono',monospace;
+}
+
+.ss-frame{
+  background:#f5f7fa;border-radius:8px;
+  overflow:hidden;border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
+}
+.ss-titlebar{
+  background:#e8eaed;padding:8px 14px;
+  display:flex;align-items:center;gap:7px;
+}
+.ss-dot{width:10px;height:10px;border-radius:50%;}
+.ss-dot:nth-child(1){background:#ff5f57;}
+.ss-dot:nth-child(2){background:#ffbd2e;}
+.ss-dot:nth-child(3){background:#28ca41;}
+.ss-wintitle{font-size:11px;color:#888;margin-left:8px;font-family:'DM Mono',monospace;}
+
+/* PRATELEIRA SCREENSHOT */
+.ss-shelf-layout{display:flex;height:360px;}
+.ss-left-panel{
+  width:200px;flex-shrink:0;background:#fff;
+  border-right:1px solid #e0e0e0;
+  display:flex;flex-direction:column;
+}
+.ss-toolbar{
+  padding:8px 10px;background:#fff;
+  border-bottom:1px solid #e8e8e8;
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.ss-tbtn{
+  background:#f5f5f5;border:1px solid #ddd;
+  border-radius:3px;padding:4px 10px;
+  font-size:10px;color:#555;cursor:default;
+  font-family:'DM Mono',monospace;
+}
+.ss-tbtn.red{background:#c8261a;border-color:#c8261a;color:#fff;}
+.ss-panel-header{
+  font-size:10px;font-weight:600;color:#999;
+  text-transform:uppercase;letter-spacing:.08em;
+  padding:8px 12px 4px;
+}
+.ss-serie-item{
+  padding:5px 12px;font-size:11px;
+  display:flex;justify-content:space-between;
+  color:#444;cursor:default;
+}
+.ss-serie-item:hover{background:#f5f5f5;}
+.ss-serie-item.active{background:#e3f2fd;color:#1565c0;font-weight:500;}
+.ss-serie-item .count{color:#999;font-size:10px;}
+.ss-serie-item .pct-gold{color:#c9a800;font-weight:600;}
+
+.ss-shelf-main{flex:1;background:#3d2a15;overflow:hidden;display:flex;flex-direction:column;}
+.ss-shelf-zoom{
+  background:rgba(0,0,0,.3);padding:4px 12px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.ss-zoom-label{font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;}
+.ss-shelf-books{flex:1;padding:8px 12px;overflow:auto;}
+.ss-shelf-plank{
+  display:flex;align-items:flex-end;gap:4px;
+  padding-bottom:6px;
+  border-bottom:4px solid #2a1a08;
+  margin-bottom:8px;
+}
+.ss-book{
+  width:36px;height:54px;border-radius:2px;flex-shrink:0;
+  position:relative;cursor:default;
+}
+.ss-book.selected{outline:2px solid var(--gold);outline-offset:1px;}
+.ss-book::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.35) 0%,transparent 35%);
+  border-radius:2px;
+}
+
+.ss-detail-panel{
+  width:220px;flex-shrink:0;background:#fff;
+  border-left:1px solid #e0e0e0;
+  padding:12px;overflow:hidden;font-size:11px;
+}
+.ss-detail-pub{color:#1565c0;font-size:10px;margin-bottom:4px;}
+.ss-detail-title{font-size:14px;font-weight:700;color:#1a1714;margin-bottom:2px;}
+.ss-detail-num{color:#888;font-size:11px;margin-bottom:8px;}
+.ss-detail-cover{
+  width:80px;height:118px;border-radius:3px;
+  margin-bottom:10px;
+  background:linear-gradient(160deg,#d32f2f,#7f1c15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;text-align:center;padding:4px;
+}
+.ss-detail-section{font-weight:600;color:#333;font-size:10px;margin:8px 0 4px;text-transform:uppercase;letter-spacing:.06em;}
+.ss-detail-row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #f0f0f0;color:#555;}
+.ss-detail-row span:last-child{color:#1a1714;font-weight:500;}
+
+/* DASHBOARD SCREENSHOT */
+.ss-dashboard{background:#f5f7fa;padding:16px;}
+.ss-dash-header{
+  background:linear-gradient(135deg,var(--red),var(--blue));
+  color:#fff;border-radius:6px;
+  padding:14px 20px;margin-bottom:14px;
+  font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;
+}
+.ss-dash-filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.ss-filter-chip{
+  background:#fff;border:1px solid #ddd;border-radius:20px;
+  font-size:10px;color:#555;padding:4px 12px;
+  font-family:'DM Mono',monospace;
+}
+.ss-cards-row{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:14px;}
+.ss-card{
+  background:#fff;border-radius:6px;padding:10px;
+  border:1px solid #eee;text-align:center;
+}
+.ss-card-icon{font-size:1.1rem;margin-bottom:4px;}
+.ss-card-label{font-size:8px;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.ss-card-value{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;line-height:1;}
+.ss-card-value.red{color:var(--red);}
+.ss-card-value.blue{color:var(--blue);}
+.ss-card-value.green{color:#2e7d32;}
+.ss-card-value.gold{color:var(--gold-dim);}
+
+.ss-dash-bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ss-dash-widget{background:#fff;border-radius:6px;padding:12px;border:1px solid #eee;}
+.ss-widget-title{font-size:10px;font-weight:600;color:#333;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;}
+.ss-highlight-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;}
+.ss-hl-cover{width:28px;height:40px;border-radius:2px;background:linear-gradient(160deg,#d32f2f,#7f1c15);flex-shrink:0;}
+.ss-hl-text{font-size:9px;color:#555;line-height:1.5;}
+.ss-hl-text strong{color:#1a1714;font-weight:600;display:block;}
+.ss-recent-item{font-size:10px;color:#555;padding:3px 0;border-bottom:1px solid #f5f5f5;}
+.ss-recent-item span{color:#1565c0;font-weight:500;}
+
+/* FORMULÁRIO SCREENSHOT */
+.ss-form-layout{background:#f0f0f0;padding:12px;}
+.ss-form-window{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.15);}
+.ss-form-header{background:#1565c0;color:#fff;padding:8px 14px;font-size:11px;font-weight:600;}
+.ss-form-tabs{display:flex;background:#e8eaed;border-bottom:1px solid #ddd;overflow-x:auto;}
+.ss-form-tab{
+  font-size:9px;padding:6px 10px;color:#666;cursor:default;
+  white-space:nowrap;border-right:1px solid #ddd;
+  font-family:'DM Mono',monospace;
+}
+.ss-form-tab.active{background:#fff;color:#1565c0;font-weight:600;}
+.ss-form-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.ss-form-col{padding:14px;}
+.ss-form-col+.ss-form-col{border-left:1px solid #eee;}
+.ss-form-group{margin-bottom:10px;}
+.ss-form-label{font-size:9px;color:#888;margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em;}
+.ss-form-input{
+  width:100%;background:#f9f9f9;border:1px solid #ddd;
+  border-radius:3px;height:24px;padding:0 8px;
+  font-size:10px;color:#333;font-family:'DM Mono',monospace;
+}
+.ss-form-select{height:24px;font-size:10px;}
+.ss-cover-area{
+  background:#f5f5f5;border:2px dashed #ddd;
+  border-radius:6px;padding:20px;text-align:center;
+  margin-top:8px;
+}
+.ss-cover-placeholder{
+  width:60px;height:86px;
+  background:linear-gradient(160deg,#e0e0e0,#bdbdbd);
+  border-radius:3px;margin:0 auto 8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;color:#999;text-align:center;padding:4px;
+}
+.ss-cover-btn{font-size:9px;color:#1565c0;background:none;border:none;cursor:default;text-decoration:underline;}
+
+/* ── DOWNLOAD ── */
+.download-section{background:var(--paper);}
+.download-box{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:3px solid var(--ink);border-radius:var(--radius);
+  overflow:hidden;margin-top:2.5rem;
+}
+.download-info{padding:3rem;background:var(--ink);color:var(--paper);}
+.download-info h3{color:var(--paper);font-size:1.9rem;margin-bottom:1rem;}
+.download-info p{color:rgba(245,240,232,.55);font-size:.9rem;line-height:1.7;margin-bottom:2rem;}
+.version-badge{
+  display:inline-block;
+  background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.25);
+  color:var(--gold);font-family:'DM Mono',monospace;
+  font-size:.78rem;padding:.3rem .8rem;border-radius:3px;margin-bottom:1.5rem;
+}
+.sys-reqs{padding:3rem;background:var(--paper-dark);}
+.sys-reqs h3{margin-bottom:1.5rem;}
+.req-list{list-style:none;}
+.req-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:.7rem 0;border-bottom:1px solid var(--border);font-size:.9rem;
+}
+.req-list li:last-child{border-bottom:none;}
+.req-icon{
+  width:18px;height:18px;background:var(--ink);border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;margin-top:2px;
+}
+.req-icon::after{content:'✓';color:var(--gold);font-size:9px;font-weight:700;}
+
+/* ── PLANOS ── */
+.plans-section{background:var(--paper-dark);}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+.plan-card{border:3px solid var(--ink);border-radius:var(--radius);overflow:hidden;}
+.plan-header{padding:1.5rem 2rem;background:var(--ink);}
+.plan-card.featured .plan-header{background:var(--red);}
+.plan-name{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--paper);letter-spacing:.05em;}
+.plan-price{font-size:.85rem;color:rgba(245,240,232,.5);margin-top:.3rem;}
+.plan-price strong{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--paper);display:block;line-height:1;}
+.plan-body{padding:2rem;background:var(--paper);}
+.plan-features{list-style:none;}
+.plan-features li{
+  padding:.55rem 0;border-bottom:1px solid var(--border);
+  font-size:.88rem;display:flex;gap:10px;align-items:flex-start;
+}
+.plan-features li:last-child{border-bottom:none;}
+.plan-features li::before{content:'→';color:var(--red);font-weight:700;flex-shrink:0;margin-top:1px;}
+.plan-features li.no::before{content:'×';color:var(--muted);}
+.plan-features li.no{color:var(--muted);opacity:.5;}
+.plan-cta{margin-top:1.5rem;}
+
+/* ── FAQ ── */
+.faq-section{background:var(--paper);}
+.faq-list{margin-top:2.5rem;max-width:740px;}
+.faq-item{border-bottom:2px solid var(--ink);}
+.faq-question{
+  width:100%;text-align:left;background:none;border:none;
+  padding:1.3rem 0;font-family:'DM Sans',sans-serif;
+  font-size:.98rem;font-weight:500;color:var(--text);
+  cursor:pointer;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;transition:color .2s;
+}
+.faq-question:hover{color:var(--red);}
+.faq-arrow{
+  width:26px;height:26px;border:2px solid currentColor;
+  border-radius:2px;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;font-size:.95rem;
+  transition:transform .25s;
+}
+.faq-item.open .faq-arrow{transform:rotate(45deg);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-answer-inner{padding:0 0 1.5rem;color:var(--muted);font-size:.92rem;line-height:1.7;}
+
+/* ── CHANGELOG ── */
+.changelog-section{background:var(--paper-dark);}
+.changelog-list{margin-top:2.5rem;max-width:680px;}
+.changelog-entry{display:flex;gap:2rem;padding-bottom:2.5rem;position:relative;}
+.changelog-entry::before{
+  content:'';position:absolute;left:80px;top:28px;bottom:0;
+  width:2px;background:var(--border);
+}
+.changelog-entry:last-child::before{display:none;}
+.changelog-version{width:68px;flex-shrink:0;text-align:right;}
+.version-tag{
+  font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;
+  background:var(--ink);color:var(--gold);
+  padding:.25rem .5rem;border-radius:3px;display:inline-block;
+}
+.version-date{font-size:.7rem;color:var(--muted);margin-top:4px;display:block;}
+.changelog-dot{width:28px;flex-shrink:0;display:flex;justify-content:center;padding-top:5px;}
+.changelog-dot::before{
+  content:'';width:12px;height:12px;border-radius:50%;
+  background:var(--red);border:2px solid var(--paper-dark);display:block;
+}
+.changelog-body h4{font-weight:500;font-size:.95rem;margin-bottom:.5rem;}
+.changelog-body ul{padding-left:1rem;font-size:.87rem;color:var(--muted);line-height:1.85;}
+
+/* ── CONTATO ── */
+.contact-section{background:var(--ink);color:var(--paper);}
+.contact-section h2{color:var(--paper);}
+.contact-section .section-label{color:var(--gold);}
+.contact-section .section-label::before{background:var(--gold);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;align-items:start;}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;}
+.form-group label{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,240,232,.4);}
+.form-group input,.form-group textarea,.form-group select{
+  background:rgba(245,240,232,.06);border:1px solid rgba(245,240,232,.13);
+  border-radius:var(--radius);color:var(--paper);
+  font-family:'DM Sans',sans-serif;font-size:.95rem;
+  padding:.75rem 1rem;outline:none;transition:border-color .2s;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(200,38,26,.5);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.contact-info p{color:rgba(245,240,232,.5);font-size:.93rem;line-height:1.75;margin-bottom:1.5rem;}
+.contact-detail{display:flex;align-items:center;gap:12px;margin-bottom:1rem;font-size:.88rem;color:rgba(245,240,232,.6);}
+.c-icon{width:34px;height:34px;background:rgba(245,240,232,.07);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;}
+
+/* ── FOOTER ── */
+footer{
+  background:#070605;
+  padding:2rem clamp(1.5rem,5vw,4rem);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+  border-top:3px solid var(--red);
+}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--paper);letter-spacing:.05em;}
+.footer-logo span{color:var(--red);}
+.footer-sigla{font-family:'DM Sans',sans-serif;font-size:.65rem;color:rgba(245,240,232,.25);letter-spacing:.06em;text-transform:uppercase;font-weight:400;margin-top:2px;}
+.hero-sigla{font-size:.72rem;color:rgba(245,240,232,.35);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;font-weight:400;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links a{font-size:.78rem;color:rgba(245,240,232,.3);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--paper);}
+
+/* ── FADE IN ── */
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-shelf{display:none;}
+  .download-box{grid-template-columns:1fr;}
+  .plans-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .ss-cards-row{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:660px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:fixed;top:56px;inset-inline:0;
+    background:var(--ink);padding:1.5rem 2rem;gap:1.5rem;
+    border-top:2px solid var(--red);z-index:99;
+  }
+  h1{font-size:3.2rem;}
+  .hero-stats{gap:1.5rem;}
+  .changelog-entry{flex-direction:column;gap:.5rem;}
+  .changelog-entry::before{display:none;}
+  .changelog-dot{display:none;}
+  .changelog-version{text-align:left;}
+  footer{flex-direction:column;text-align:center;}
+  .ss-cards-row{grid-template-columns:repeat(2,1fr);}
+  .ss-dash-bottom{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">HQ</div>
+    <span>SIGEN</span>&nbsp;HQ
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li><a href="#download" class="nav-cta">Baixar grátis</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-shelf">
+    <div class="shelf-wrap">
+      <img src="screen1.png" alt="Prateleira do Sigen HQ com capas reais organizadas em estantes"
+           style="width:100%;max-width:600px;border-radius:8px;display:block;box-shadow:-20px 20px 60px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.08);">
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Versão 1.0 em desenvolvimento</div>
+    <div class="hero-sigla">Sistema de Gerenciamento de Histórias em Quadrinhos</div>
+    <h1>
+      Catalogue<br>
+      sua coleção<br>
+      <span class="gold">do jeito</span><br>
+      <span class="accent">certo.</span>
+    </h1>
+    <p class="hero-sub">
+      Sigen HQ é o catalogador mais completo para quadrinhos no Windows. Prateleira visual, dashboard completo, importação de dados da web, 10 abas de cadastro e muito mais — rodando 100% no seu PC.
+    </p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary">↓ Baixar grátis</a>
+      <a href="#screenshots" class="btn-ghost">Ver screenshots →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">10</span>
+        <span class="hero-stat-label">Abas de cadastro</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">3</span>
+        <span class="hero-stat-label">Modos de exibição</span>
+      </div>
+      <div>
+        <span class="hero-stat-num">100%</span>
+        <span class="hero-stat-label">Offline</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNCIONALIDADES -->
+<section class="features-section" id="funcionalidades">
+  <div class="section-label">O que o Sigen HQ faz</div>
+  <h2>Feito para quem leva a coleção a sério</h2>
+  <p class="features-intro">Cada funcionalidade foi pensada por um colecionador, para colecionadores. Do cadastro mais simples à análise mais detalhada da sua coleção.</p>
+
+  <div class="features-tabs">
+    <button class="ftab active" onclick="showFtab('catalogo',this)">Catálogo</button>
+    <button class="ftab" onclick="showFtab('importexport',this)">Importação & Exportação</button>
+    <button class="ftab" onclick="showFtab('organizacao',this)">Organização</button>
+    <button class="ftab" onclick="showFtab('analise',this)">Análise</button>
+    <button class="ftab" onclick="showFtab('utilitarios',this)">Utilitários</button>
+  </div>
+
+  <div class="features-panel active" id="fp-catalogo">
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3>Cadastro individual</h3>
+      <p>Formulário completo com 10 abas: informações, valores, detalhes, criadores, personagens, cronologia, empréstimos e mais.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <h3>Cadastro em lote</h3>
+      <p>Adicione múltiplas edições de uma série de uma vez. Ideal para quem está montando o acervo do zero.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">✏️</div>
+      <h3>Edição em lote</h3>
+      <p>Edite campos de múltiplas edições simultaneamente. Atualize editora, formato ou qualquer campo para dezenas de HQs de uma vez.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🖼️</div>
+      <h3>Capas reais</h3>
+      <p>Upload manual da capa ou importação de alguns dados (capa e metadados) direto de páginas de sites de quadrinhos.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏷️</div>
+      <h3>Tags personalizadas</h3>
+      <p>Adicione tags livres a qualquer edição com sugestões automáticas. Organize sua coleção do seu jeito.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📍</div>
+      <h3>Localização física</h3>
+      <p>Registre onde cada HQ está na sua prateleira real. Nunca mais passe horas procurando aquela edição específica.</p>
+    </div>
+  </div>
+
+  <div class="features-panel" id="fp-importexport">
+    <div class="feat-card">
+      <div class="feat-icon">🌐</div>
+      <h3>Importar da web</h3>
+      <p>Importa alguns dados (capa e metadados, como título, editora e data) direto da página de sites de quadrinhos — sem digitar tudo à mão.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📥</div>
+      <h3>Importar arquivos</h3>
+      <p>Importe sua coleção de XML, CSV, Excel ou JSON. Compatível com exportações de outros catalogadores.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📄</div>
+      <h3>Exportar para PDF</h3>
+      <p>Gere um catálogo completo em PDF para imprimir ou compartilhar. Também exporta a galeria de capas em PDF.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌍</div>
+      <h3>Exportar HTML</h3>
+      <p>Exporte sua coleção como um site HTML navegável — abre no browser, sem precisar do Sigen HQ instalado.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>Exportar dados</h3>
+      <p>XML, CSV, Excel ou JSON — exporte tudo ou só a seleção atual, por série ou lista de faltantes.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🖼️</div>
+      <h3>Galeria de capas</h3>
+      <p>Exporte uma galeria das capas da sua coleção em PDF ou HTML — perfeito para registrar e compartilhar.</p>
+    </div>
+  </div>
+
+  <div class="features-panel" id="fp-organizacao">
+    <div class="feat-card">
+      <div class="feat-icon">📚</div>
+      <h3>Séries</h3>
+      <p>Crie e gerencie séries. Visualize a completude de cada uma com percentual de edições presentes vs faltantes.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔗</div>
+      <h3>Sagas, arcos e eventos</h3>
+      <p>Agrupe edições por sagas, arcos ou eventos crossover. Veja o progresso de leitura de cada agrupamento.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⏱️</div>
+      <h3>Cronologia & Vínculos</h3>
+      <p>Vincule histórias entre edições diferentes e monte a ordem cronológica correta de leitura de qualquer série.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⭐</div>
+      <h3>Wishlist</h3>
+      <p>Mantenha uma lista de desejados (Sonho de Consumo) separada da coleção. Saiba exatamente o que está faltando.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">✅</div>
+      <h3>Checklist de faltantes</h3>
+      <p>Veja de um relance quais edições de cada série ainda estão faltando na sua coleção.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🤝</div>
+      <h3>Controle de empréstimos</h3>
+      <p>Registre para quem emprestou, com data prevista de devolução e histórico completo de cada empréstimo.</p>
+    </div>
+  </div>
+
+  <div class="features-panel" id="fp-analise">
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <h3>Dashboard completo</h3>
+      <p>6 abas de análise: Resumo, Valores, Leitura, Distribuição, Atividade e Análise de Referências. Com filtros globais por período, série e editora.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💰</div>
+      <h3>Análise de valor</h3>
+      <p>Compare preço de compra vs valor de mercado, calcule ROI da coleção e veja histograma de distribuição por faixa de preço.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📖</div>
+      <h3>Progresso de leitura</h3>
+      <p>Acompanhe quantas HQs já leu, por série e por gênero. Registre data de leitura em cada edição.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🧩</div>
+      <h3>Matriz de Conteúdo</h3>
+      <p>Compare histórias originais entre edições diferentes — identifique conteúdos comuns, exclusivos ou ausentes entre coletâneas.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <h3>Crescimento da coleção</h3>
+      <p>Veja graficamente como sua coleção cresceu ao longo do tempo — mensal, trimestral ou anual.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3>Completude de dados</h3>
+      <p>Identifique gaps no cadastro — quais campos estão sem preenchimento em quais séries — e melhore a qualidade do acervo.</p>
+    </div>
+  </div>
+
+  <div class="features-panel" id="fp-utilitarios">
+    <div class="feat-card">
+      <div class="feat-icon">🔍</div>
+      <h3>Busca global</h3>
+      <p>Busca em título, número e série simultaneamente com resposta em 80ms. Exibe contador de resultados em tempo real.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏷️</div>
+      <h3>Etiquetas e QR Codes</h3>
+      <p>Gere etiquetas para organizar fisicamente sua coleção. QR Code vinculado a cada edição no banco de dados.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💾</div>
+      <h3>Backup e restauração</h3>
+      <p>Faça backup do banco de dados com um clique e restaure quando precisar. Seus dados sempre seguros.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔧</div>
+      <h3>Localizar e substituir</h3>
+      <p>Encontre e substitua valores em qualquer campo do banco — útil para corrigir nomes de editoras ou séries em lote.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛡️</div>
+      <h3>Integridade do banco</h3>
+      <p>Verificação e otimização automática do banco de dados (vacuum). Mantém o app rápido mesmo com milhares de edições.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📖</div>
+      <h3>Manual integrado</h3>
+      <p>Manual do usuário e dicas rápidas dentro do próprio app. Não precisa procurar ajuda em outro lugar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots-section" id="screenshots">
+  <div class="section-label">Interface real</div>
+  <h2>Veja o app em ação</h2>
+  <p>Todas as telas abaixo representam o Sigen HQ funcionando — sem enfeite, sem mockup genérico.</p>
+
+  <div class="ss-tabs">
+    <button class="sstab active" onclick="showSS('prateleira',this)">Prateleira</button>
+    <button class="sstab" onclick="showSS('detalhe',this)">Formulário</button>
+    <button class="sstab" onclick="showSS('dashboard',this)">Dashboard</button>
+    <button class="sstab" onclick="showSS('formulario',this)">Matriz de Conteúdo</button>
+  </div>
+
+  <!-- PRATELEIRA -->
+  <div class="ss-panel active" id="ss-prateleira">
+    <div class="ss-real-img">
+      <img src="screen1.png" alt="Prateleira visual do Sigen HQ com capas de quadrinhos organizadas em estantes de madeira">
+    </div>
+    <p class="ss-caption">↑ Modo Prateleira — visualização de capas com lista de séries e painel de detalhes</p>
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <div class="ss-panel" id="ss-detalhe">
+    <div class="ss-real-img">
+      <img src="screen4.png" alt="Formulário de cadastro de HQ do Sigen HQ com 10 abas">
+    </div>
+    <p class="ss-caption">↑ Formulário com 10 abas — Informações, Valores, Detalhes, Pessoal, Criadores, Personagens, Referências Cruzadas, Cronologia, Empréstimos e Campos Extras</p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="ss-panel" id="ss-dashboard">
+    <div class="ss-real-img">
+      <img src="screen3.png" alt="Dashboard da coleção com métricas, gráficos e destaques">
+    </div>
+    <p class="ss-caption">↑ Dashboard com 7 métricas, progresso de leitura, destaques e últimas adições — filtrável por período, série e editora</p>
+  </div>
+
+  <!-- MATRIZ DE CONTEÚDO -->
+  <div class="ss-panel" id="ss-formulario">
+    <div class="ss-real-img">
+      <img src="screen2.png" alt="Matriz de Conteúdo do Sigen HQ comparando histórias entre edições">
+    </div>
+    <p class="ss-caption">↑ Matriz de Conteúdo — compara as histórias originais entre edições diferentes, identificando o que é comum, exclusivo ou ausente em cada coletânea</p>
+  </div>
+</section>
+
+
+<!-- DOWNLOAD -->
+<section class="download-section" id="download">
+  <div class="section-label">Baixar agora</div>
+  <h2>Grátis para começar</h2>
+  <div class="download-box fade-in">
+    <div class="download-info">
+      <div class="version-badge">v1.0.0 — Lançamento em breve</div>
+      <h3>Instalador para Windows</h3>
+      <p>Um arquivo .exe. Instala em segundos como qualquer programa. Sem Python instalado, sem dependências externas — tudo já incluso.</p>
+      <a href="https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.0.0.exe" class="btn-primary" style="display:inline-flex;width:fit-content;">↓ Baixar Sigen HQ</a>
+      <p style="margin-top:1rem;font-size:.8rem;color:rgba(245,240,232,.25);">Requer Windows 10 ou 11 · 64-bit</p>
+    </div>
+    <div class="sys-reqs">
+      <h3>Requisitos do sistema</h3>
+      <ul class="req-list">
+        <li><div class="req-icon"></div><div><strong>Windows 10 ou 11</strong> (64-bit)</div></li>
+        <li><div class="req-icon"></div><div><strong>Sem Python</strong> — tudo incluso no instalador</div></li>
+        <li><div class="req-icon"></div><div><strong>Funciona offline</strong> — internet só para a importação da web</div></li>
+        <li><div class="req-icon"></div><div><strong>Sem conta obrigatória</strong> — não precisa criar login para usar</div></li>
+        <li><div class="req-icon"></div><div><strong>Banco de dados local</strong> — seus dados ficam no seu PC</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="plans-section" id="planos">
+  <div class="section-label">Licenciamento</div>
+  <h2>Trial gratuito, upgrade quando quiser</h2>
+  <div class="plans-grid fade-in">
+    <div class="plan-card">
+      <div class="plan-header">
+        <div class="plan-name">Trial gratuito</div>
+        <div class="plan-price"><strong>Grátis</strong>Para sempre, sem prazo</div>
+      </div>
+      <div class="plan-body">
+        <ul class="plan-features">
+          <li>Catalogue até 100 edições</li>
+          <li>Todas as funcionalidades ativas</li>
+          <li>Prateleira visual, lista e grade</li>
+          <li>Dashboard completo</li>
+          <li>Importação de dados da web</li>
+          <li>Exportação PDF e HTML</li>
+          <li class="no">Acima de 100 edições (apenas na versão completa)</li>
+          <li class="no">Suporte prioritário por e-mail</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="#download" class="btn-primary" style="display:block;text-align:center;">Baixar grátis</a>
+        </div>
+      </div>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-header">
+        <div class="plan-name">Licença completa</div>
+        <div class="plan-price"><strong>R$ 54,99</strong>Pagamento único · sem assinatura</div>
+      </div>
+      <div class="plan-body">
+        <ul class="plan-features">
+          <li>HQs ilimitadas na coleção</li>
+          <li>Todas as funcionalidades ativas</li>
+          <li>Prateleira visual, lista e grade</li>
+          <li>Dashboard completo</li>
+          <li>Importação de dados da web</li>
+          <li>Exportação PDF e HTML</li>
+          <li>Ativa em até 2 computadores</li>
+          <li>Suporte por e-mail</li>
+        </ul>
+        <div class="plan-cta">
+          <a href="https://mpago.li/2CZn5Ns" target="_blank" rel="noopener" class="btn-primary" style="display:block;text-align:center;">Comprar — R$ 54,99</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-label">Dúvidas frequentes</div>
+  <h2>Perguntas &amp; respostas</h2>
+  <div class="faq-list fade-in">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como funciona a compra e a ativação? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        É simples, pagamento único (sem assinatura):
+        <br><br>
+        <strong>1.</strong> Clique em <strong>Comprar</strong> — você é levado ao pagamento seguro (Mercado Pago). Pode pagar por PIX, boleto ou cartão.<br>
+        <strong>2.</strong> Depois de pagar, abra o Sigen HQ e vá em <strong>Ajuda → Ativar Licença</strong>. Copie o <strong>"ID desta máquina"</strong> e envie para <strong>sigenhq@zohomail.com</strong> junto com o comprovante.<br>
+        <strong>3.</strong> Você recebe por e-mail a sua <strong>chave de ativação</strong>.<br>
+        <strong>4.</strong> Cole a chave em <strong>Ajuda → Ativar Licença</strong> e pronto — a versão completa é liberada, sem limite de edições.
+        <br><br>
+        A mesma licença pode ser ativada em <strong>até 2 computadores</strong>. A ativação funciona offline depois de feita.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">O Sigen HQ funciona sem internet? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Sim, 100% offline. Seus dados ficam num banco de dados local no seu computador. A internet é usada apenas quando você opta por importar alguns dados (capa e metadados) da web — e mesmo isso é opcional.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Preciso ter Python instalado? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Não. O instalador .exe já traz tudo necessário embutido. Basta instalar como qualquer outro programa do Windows — sem configurar nada.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como funciona a importação da web? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Há um botão "Importar da Web". Você informa a edição e o app busca em sites de quadrinhos, exibindo os resultados. Ao selecionar, alguns dados disponíveis na página (capa e metadados) são preenchidos para você. Não é necessária nenhuma chave de API — a importação lê os dados da própria página (HTML).</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Posso importar dados de outro software de catalogação? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">Sim. O Sigen HQ importa arquivos XML, CSV, Excel e JSON. Se seu catalogador atual exporta em algum desses formatos, você consegue migrar sua coleção.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como faço backup da minha coleção? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">O app tem função de backup integrada com um clique. Também é possível simplesmente copiar o arquivo de banco de dados (.db) para qualquer lugar. Na restauração, basta apontar para o arquivo de backup.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">O que é a Matriz de Conteúdo? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">É uma ferramenta de análise que compara histórias originais entre edições diferentes da sua coleção. Por exemplo: você pode comparar um Omnibus com os números avulsos que ele coleta, identificando quais histórias estão presentes, ausentes ou exclusivas em cada edição. Muito útil para quem tem várias edições do mesmo conteúdo.</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CHANGELOG -->
+<section class="changelog-section" id="changelog">
+  <div class="section-label">Histórico de versões</div>
+  <h2>Changelog</h2>
+  <div class="changelog-list fade-in">
+    <div class="changelog-entry">
+      <div class="changelog-version">
+        <span class="version-tag">v1.0.0</span>
+        <span class="version-date">Em breve</span>
+      </div>
+      <div class="changelog-dot"></div>
+      <div class="changelog-body">
+        <h4>Lançamento inicial</h4>
+        <ul>
+          <li>Prateleira visual com capas reais, modo lista e modo grade</li>
+          <li>Formulário de cadastro com 10 abas e mais de 60 campos</li>
+          <li>Importação de dados da web (capa + alguns metadados, via página/HTML)</li>
+          <li>Importação de XML, CSV, Excel e JSON</li>
+          <li>Exportação para PDF, HTML, XML, CSV e Excel</li>
+          <li>Dashboard com 6 abas de análise e gráficos interativos</li>
+          <li>Matriz de Conteúdo para análise comparativa de histórias</li>
+          <li>Sagas, arcos, eventos e cronologia de leitura</li>
+          <li>Controle de empréstimos com histórico</li>
+          <li>Gerador de etiquetas e QR Codes</li>
+          <li>Backup, restauração e verificação de integridade do banco</li>
+          <li>Manual do usuário integrado ao app</li>
+          <li>Instalador nativo .exe para Windows 10 e 11</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact-section" id="contato">
+  <div class="section-label">Fale conosco</div>
+  <h2>Contato</h2>
+  <div class="contact-grid fade-in">
+    <div class="contact-form">
+      <div class="form-group"><label>Nome</label><input type="text" placeholder="Seu nome"></div>
+      <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+      <div class="form-group">
+        <label>Assunto</label>
+        <select>
+          <option>Suporte técnico</option>
+          <option>Problema com ativação</option>
+          <option>Sugestão de funcionalidade</option>
+          <option>Reporte de bug</option>
+          <option>Quero saber quando lançar</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Mensagem</label><textarea placeholder="Descreva sua dúvida ou sugestão..."></textarea></div>
+      <button class="btn-primary" onclick="handleForm(event)">Enviar mensagem →</button>
+    </div>
+    <div class="contact-info">
+      <p>Tem dúvidas, encontrou um bug ou quer sugerir uma funcionalidade? Fale diretamente com o desenvolvedor.</p>
+      <p>O Sigen HQ é desenvolvido de forma independente por um colecionador de verdade. Cada feedback conta.</p>
+      <div class="contact-detail"><div class="c-icon">✉</div><span>sigenhq@zohomail.com</span></div>
+      <div class="contact-detail"><div class="c-icon">🪟</div><span>Windows 10 / 11 · 64-bit</span></div>
+      <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(245,240,232,.08);font-size:.82rem;color:rgba(245,240,232,.3);line-height:1.7;">
+        Resposta em até 48h em dias úteis.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>SIGEN</span> HQ<div class="footer-sigla">Sistema de Gerenciamento de Histórias em Quadrinhos</div></div>
+  <ul class="footer-links">
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#download">Download</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#changelog">Changelog</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Sigen HQ · Todos os direitos reservados</div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+function showFtab(name, btn) {
+  document.querySelectorAll('.features-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+  document.getElementById('fp-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showSS(name, btn) {
+  document.querySelectorAll('.ss-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sstab').forEach(b => b.classList.remove('active'));
+  document.getElementById('ss-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.textContent = 'Mensagem enviada ✓';
+  btn.style.background = '#1a5c3a';
+  setTimeout(() => { btn.textContent = 'Enviar mensagem →'; btn.style.background = ''; }, 3000);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

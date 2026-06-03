@@ -1,1 +1,5 @@
-{"version": "1.0.0"}
+{
+  "version": "1.0.0",
+  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
+  "notes": "Versao inicial do Sigen HQ."
+}
