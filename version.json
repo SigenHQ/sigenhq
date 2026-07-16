@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Versao inicial do Sigen HQ."
+  "notes": "Correcao importante: o programa nao abria em computadores com processadores mais antigos (ate ~2013). Tambem corrige o dialogo 'Adicionar a Saga' e adiciona cor propria para a situacao Emprestado."
 }
