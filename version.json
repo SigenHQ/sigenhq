@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Correcao importante: o programa nao abria em computadores com processadores mais antigos (ate ~2013). Tambem corrige o dialogo 'Adicionar a Saga' e adiciona cor propria para a situacao Emprestado."
+  "notes": "Novidades: controle de leitura (campo Lido + filtro Lidos/Nao lidos + marcacao em lote); importacoes e restauracao de backup atualizam os paineis sem reabrir; Nova Colecao corrigida; mensagem explicativa no import; tema padrao Claro."
 }
