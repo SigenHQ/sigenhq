@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.1.0",
   "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Novidades: controle de leitura (campo Lido + filtro Lidos/Nao lidos + marcacao em lote); importacoes e restauracao de backup atualizam os paineis sem reabrir; Nova Colecao corrigida; mensagem explicativa no import; tema padrao Claro."
+  "notes": "Painel esquerdo repaginado: nomes de serie mais limpos, quantidade/progresso em colunas alinhadas, completas com visto, divisor ajustavel Series/Sagas, selecao pelo fundo e zebrado sutil. Corrigido: no painel de Sagas marcar algumas edicoes como concluidas nao marca mais a saga inteira (progresso real)."
 }
