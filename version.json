@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Novo assistente de importacao com MAPEAMENTO de colunas: importa Excel/CSV em qualquer formato (escolhe aba, linha do cabecalho e mapeia as colunas). Tooltip em titulos longos, aviso de atualizacao com download direto e mensagens de depuracao no arquivo de log."
+  "notes": "Menos alarmes falsos de antivirus: mudanca no formato de instalacao (os arquivos vao direto para a pasta do programa, sem descompactar ao abrir). Sagas agora mostram a quantidade de edicoes. Instale por cima: sua colecao continua intacta."
 }
