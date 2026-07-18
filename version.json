@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Painel esquerdo repaginado: nomes de serie mais limpos, quantidade/progresso em colunas alinhadas, completas com visto, divisor ajustavel Series/Sagas, selecao pelo fundo e zebrado sutil. Corrigido: no painel de Sagas marcar algumas edicoes como concluidas nao marca mais a saga inteira (progresso real)."
+  "notes": "Novo assistente de importacao com MAPEAMENTO de colunas: importa Excel/CSV em qualquer formato (escolhe aba, linha do cabecalho e mapeia as colunas). Tooltip em titulos longos, aviso de atualizacao com download direto e mensagens de depuracao no arquivo de log."
 }

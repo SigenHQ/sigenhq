@@ -784,7 +784,7 @@ footer{
   </div>
 
   <div class="hero-content">
-    <div class="hero-badge">Versão 1.1.0 — disponível agora</div>
+    <div class="hero-badge">Versão 1.2.0 — disponível agora</div>
     <div class="hero-sigla">Sistema de Gerenciamento de Histórias em Quadrinhos</div>
     <h1>
       Catalogue<br>
@@ -1044,10 +1044,10 @@ footer{
   <h2>Grátis para começar</h2>
   <div class="download-box fade-in">
     <div class="download-info">
-      <div class="version-badge">v1.1.0 — disponível agora</div>
+      <div class="version-badge">v1.2.0 — disponível agora</div>
       <h3>Instalador para Windows</h3>
       <p>Um arquivo .exe. Instala em segundos como qualquer programa. Sem Python instalado, sem dependências externas — tudo já incluso.</p>
-      <a href="https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.1.0.exe" class="btn-primary" style="display:inline-flex;width:fit-content;">↓ Baixar Sigen HQ</a>
+      <a href="https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.0.exe" class="btn-primary" style="display:inline-flex;width:fit-content;">↓ Baixar Sigen HQ</a>
       <p style="margin-top:1rem;font-size:.8rem;color:rgba(245,240,232,.25);">Requer Windows 10 ou 11 · 64-bit</p>
       <details class="ss-note">
         <summary>O Windows bloqueou a instalação? É normal — veja como prosseguir</summary>
@@ -1213,8 +1213,60 @@ footer{
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">O que é a Matriz de Conteúdo? <div class="faq-arrow">+</div></button>
-      <div class="faq-answer"><div class="faq-answer-inner">É uma ferramenta de análise que compara histórias originais entre edições diferentes da sua coleção. Por exemplo: você pode comparar um Omnibus com os números avulsos que ele coleta, identificando quais histórias estão presentes, ausentes ou exclusivas em cada edição. Muito útil para quem tem várias edições do mesmo conteúdo.</div></div>
+      <button class="faq-question" onclick="toggleFaq(this)">O que é a Matriz de Conteúdo e para que serve? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        A <strong>Matriz de Conteúdo</strong> (menu <strong>Exibir → Matriz de Conteúdo</strong>) é uma ferramenta avançada que analisa <strong>o que está dentro</strong> de cada edição — as histórias originais, arcos e personagens — e não só a capa. Ela tem dois modos:
+        <br><br>
+        <strong>Análise Estratégica:</strong> mostra o mapeamento completo do conteúdo da série selecionada, com abas de Índice, Cobertura, Métricas e mais.
+        <br><br>
+        <strong>Comparação Agrupada (Comparar Séries):</strong> coloca duas ou mais edições/séries lado a lado e mostra a <strong>cobertura percentual</strong>, quais histórias cada uma <strong>tem, ganha ou perde</strong> em relação a uma edição de referência.
+        <br><br>
+        Na prática: antes de comprar um <strong>Omnibus</strong>, uma <strong>Encadernada</strong> ou uma nova coleção, você compara com o que já tem e descobre <strong>qual edição cobre mais histórias</strong> — evitando comprar material repetido. É a ferramenta ideal para colecionadores que têm várias edições do mesmo conteúdo (Panini, Abril, Pipoca &amp; Nanquim, mangás JBC, etc.).
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como cadastro várias edições de uma vez? (Adicionar em Lote) <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        O <strong>Adicionar em Lote</strong> (menu <strong>Arquivo → Adicionar em Lote</strong>, ou <strong>Ctrl+Shift+N</strong>) cria várias edições de uma série de uma só vez — perfeito para cadastrar uma coleção inteira em segundos, em vez de uma por uma.
+        <br><br>
+        <strong>1.</strong> Escolha a <strong>série</strong> e a <strong>faixa de números</strong> (ex.: do 1 ao 50).<br>
+        <strong>2.</strong> Defina os <strong>dados comuns</strong> a todas (editora, formato, idioma, país…) — preenche uma vez, vale para todas.<br>
+        <strong>3.</strong> <strong>Marque quais você já possui</strong> (as não marcadas entram como "Sonho de Consumo" e vão para a sua wishlist).<br>
+        <strong>4.</strong> Se quiser, configure <strong>variantes</strong> por edição e <strong>importe as capas</strong> na mesma tela.
+        <br><br>
+        Se a série já tiver edições cadastradas, o programa as reconhece e mostra a situação de cada uma — sem duplicar. Tudo que você digita nos campos vira opção de seleção para os próximos cadastros.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como adiciono várias capas de uma vez? (Capas em Lote) <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Você não precisa associar capa por capa. O Sigen HQ importa uma <strong>pasta inteira de imagens</strong> e associa automaticamente às edições:
+        <br><br>
+        <strong>Sequência por série:</strong> aponte a pasta com as capas em ordem numérica e o programa liga cada arquivo à edição correspondente da série (1ª imagem → edição 1, e assim por diante). Ideal quando você tem as capas nomeadas/ordenadas.
+        <br><br>
+        Também dá para fazer a <strong>seleção visual</strong> das capas de uma pasta dentro da tela de Adicionar/Editar, escolhendo miniatura por miniatura. Formatos aceitos: <strong>JPG, PNG, WEBP e BMP</strong>. É uma das funções mais práticas para montar a prateleira visual rapidamente.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Minha planilha do Excel não importava. E agora? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Cada pessoa monta a planilha do seu jeito (nomes de coluna diferentes, título na primeira linha, várias abas). Por isso o Sigen HQ tem o <strong>assistente de importação com mapeamento de colunas</strong> (menu <strong>Arquivo → Importar Formatos de Dados → Importar planilha com MAPEAMENTO de colunas</strong>):
+        <br><br>
+        <strong>1.</strong> Escolha a planilha (Excel <strong>.xlsx</strong> ou <strong>.csv</strong>) e, se tiver várias abas, selecione a aba.<br>
+        <strong>2.</strong> Indique a <strong>linha do cabeçalho</strong> — o programa mostra uma prévia.<br>
+        <strong>3.</strong> <strong>Mapeie cada coluna</strong> da sua planilha para os campos do programa (Série, Número, Editora, Situação…). Ele até <strong>adivinha</strong> o mapeamento pelo nome das colunas.<br>
+        <strong>4.</strong> Clique em <strong>Importar</strong> — sem precisar renomear coluna nenhuma.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Quais editoras, formatos e tipos de quadrinho o Sigen HQ suporta? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        O Sigen HQ é livre de formato: você cataloga <strong>quadrinhos, HQs, gibis, mangás, graphic novels, encadernados, omnibus e revistas</strong> de <strong>qualquer editora</strong>. Ele já vem com campos e listas prontas para as principais editoras do Brasil — como <strong>Panini</strong>, <strong>JBC</strong>, <strong>Pipoca &amp; Nanquim</strong>, <strong>Abril</strong>, <strong>Devir</strong>, <strong>Mythos</strong>, entre outras — mas você pode adicionar qualquer editora, formato ou idioma novo, e o programa memoriza para os próximos cadastros. Serve tanto para comics americanos e europeus quanto para mangás japoneses e produção nacional.
+      </div></div>
     </div>
 
   </div>
@@ -1225,6 +1277,22 @@ footer{
   <div class="section-label">Histórico de versões</div>
   <h2>Changelog</h2>
   <div class="changelog-list fade-in">
+    <div class="changelog-entry">
+      <div class="changelog-version">
+        <span class="version-tag">v1.2.0</span>
+        <span class="version-date">Jul 2026</span>
+      </div>
+      <div class="changelog-dot"></div>
+      <div class="changelog-body">
+        <h4>Importa qualquer planilha (17/07/2026)</h4>
+        <ul>
+          <li><strong>Novo:</strong> assistente de importação com <strong>mapeamento de colunas</strong> — escolha a aba, a linha do cabeçalho e ligue cada coluna da sua planilha aos campos do programa (ele adivinha sozinho pelo nome). Importa Excel e CSV em qualquer formato, sem renomear nada</li>
+          <li>Tooltip com o nome completo ao passar o mouse em títulos de série cortados</li>
+          <li>O aviso de atualização agora baixa o instalador direto, sem página intermediária</li>
+          <li>Perguntas frequentes ampliadas: Adicionar em Lote, Capas em Lote e Matriz de Conteúdo explicados</li>
+        </ul>
+      </div>
+    </div>
     <div class="changelog-entry">
       <div class="changelog-version">
         <span class="version-tag">v1.1.0</span>
