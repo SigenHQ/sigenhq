@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
-  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest",
-  "notes": "Menos alarmes falsos de antivirus: mudanca no formato de instalacao (os arquivos vao direto para a pasta do programa, sem descompactar ao abrir). Sagas agora mostram a quantidade de edicoes. Instale por cima: sua colecao continua intacta."
+  "version": "1.2.2",
+  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.2.exe",
+  "notes": "Agora o download da atualizacao acontece dentro do programa: voce escolhe onde salvar, acompanha o progresso e pode abrir a pasta ao terminar, sem passar pelo navegador. Instale por cima: sua colecao continua intacta."
 }
