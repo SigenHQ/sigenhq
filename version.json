@@ -1,5 +1,5 @@
 {
-  "version": "1.2.5",
-  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.5.exe",
-  "notes": "Edicoes sem numero (S/N) com capa nas referencias, janelas ajustadas a telas menores e registro de diagnostico para o suporte. Instale por cima: sua colecao continua intacta."
+  "version": "1.2.6",
+  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.6.exe",
+  "notes": "Corrige o aviso automatico de nova versao, que em alguns computadores nao aparecia ao abrir o programa. Inclui tudo da 1.2.5 (edicoes S/N, telas menores e diagnostico). Instale por cima: sua colecao continua intacta."
 }
