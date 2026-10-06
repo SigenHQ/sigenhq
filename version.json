@@ -1,5 +1,5 @@
 {
-  "version": "1.2.4",
-  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.4.exe",
-  "notes": "Seguranca e estabilidade reforcadas, interface mais responsiva e melhorias na Matriz de Conteudo e na abertura de edicoes relacionadas. Instale por cima: sua colecao continua intacta."
+  "version": "1.2.5",
+  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.5.exe",
+  "notes": "Edicoes sem numero (S/N) com capa nas referencias, janelas ajustadas a telas menores e registro de diagnostico para o suporte. Instale por cima: sua colecao continua intacta."
 }
