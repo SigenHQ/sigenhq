@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sigen HQ — Software de Catalogação de Quadrinhos para Windows</title>
-<meta name="description" content="O software mais completo para catalogar sua coleção de HQs. Prateleira visual, dashboard, exportação PDF e muito mais. Para Windows, sem assinatura.">
+<title>Sigen HQ — Programa para catalogar quadrinhos, HQs, gibis e mangás (Windows)</title>
+<meta name="description" content="Programa para catalogar quadrinhos, HQs, gibis e mangás no Windows: cadastro em lote, capas, lista de faltantes e backup. Offline e grátis até 100 edições.">
 <meta name="keywords" content="catalogador de quadrinhos, organizar coleção de HQs, software para gibis, catálogo de mangás, gerenciar coleção de quadrinhos, app para colecionador de HQ, inventário de quadrinhos, organizar gibis, Sigen HQ">
 <meta name="author" content="Sigen HQ">
 <meta name="robots" content="index, follow">
@@ -35,6 +35,29 @@
   "description": "Catalogador completo para coleções de quadrinhos, gibis e mangás. Prateleira visual, dashboard e exportação em PDF.",
   "url": "https://sigenhq.com.br/",
   "offers": { "@type": "Offer", "price": "54.99", "priceCurrency": "BRL" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qual o melhor programa para catalogar quadrinhos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Depende da coleção. Para uma lista pequena, uma planilha resolve. Para catalogar quadrinhos, HQs, gibis e mangás de qualquer editora, em português, com os dados no próprio computador e sem assinatura, o Sigen HQ é um programa para Windows que funciona offline e é grátis até 100 edições. Veja o comparativo completo em https://sigenhq.com.br/guias/programas-para-catalogar-quadrinhos/" }
+    },
+    {
+      "@type": "Question",
+      "name": "Como catalogar minha coleção de quadrinhos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Separe as revistas por série e número, registre primeiro o essencial de cada edição (série, número, editora e se você tem ou não), cadastre séries inteiras de uma vez, adicione as capas e cadastre cada compra nova no mesmo dia. Passo a passo em https://sigenhq.com.br/guias/como-catalogar-quadrinhos/" }
+    },
+    {
+      "@type": "Question",
+      "name": "Como cadastrar quadrinhos rapidamente?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cadastre a série inteira em lote, informando a faixa de números e os dados comuns uma única vez, e marque as edições que você já tem. Se a coleção estiver numa planilha do Excel, importe a planilha em vez de redigitar. Detalhes em https://sigenhq.com.br/guias/como-cadastrar-quadrinhos/" }
+    }
+  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -654,6 +677,16 @@ h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;col
 .faq-item.open .faq-arrow{transform:rotate(45deg);}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;}
 .faq-answer-inner{padding:0 0 1.5rem;color:var(--muted);font-size:.92rem;line-height:1.7;}
+.faq-answer-inner a{color:var(--red);}
+
+/* ── GUIAS ── */
+.guias-section{background:var(--paper-dark);}
+.guias-intro{max-width:640px;color:var(--muted);margin-bottom:2rem;}
+.guias-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:1100px;}
+.guia-card{display:block;background:var(--paper);border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.4rem;text-decoration:none;color:var(--text);transition:transform .15s,box-shadow .15s;}
+.guia-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.guia-card h3{margin-bottom:.35rem;}
+.guia-card p{font-size:.88rem;color:var(--muted);}
 
 /* ── CHANGELOG ── */
 .changelog-section{background:var(--paper-dark);}
@@ -762,6 +795,7 @@ footer{
     <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#download">Download</a></li>
     <li><a href="#mobile">Mobile</a></li>
+    <li><a href="guias/">Guias</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contato">Contato</a></li>
     <li><a href="#download" class="nav-cta">Baixar grátis</a></li>
@@ -793,7 +827,7 @@ footer{
       <span class="accent">certo.</span>
     </h1>
     <p class="hero-sub">
-      Sigen HQ é o catalogador mais completo para quadrinhos no Windows. Prateleira visual, dashboard completo, 10 abas de cadastro e muito mais — rodando 100% no seu PC.
+      Sigen HQ é um programa para catalogar quadrinhos, HQs, gibis e mangás no Windows. Cadastre séries inteiras de uma vez, veja a coleção numa prateleira de capas, descubra o que falta e controle empréstimos — rodando 100% no seu PC.
     </p>
     <div class="hero-actions">
       <a href="#download" class="btn-primary">↓ Baixar grátis</a>
@@ -1147,10 +1181,63 @@ footer{
 </section>
 
 <!-- FAQ -->
+<section class="guias-section" id="guias">
+  <div class="section-label">Guias</div>
+  <h2>Como catalogar sua coleção de quadrinhos</h2>
+  <p class="guias-intro">Dicas práticas para catalogar, cadastrar e organizar coleções de quadrinhos, HQs, gibis e mangás — com ou sem programa.</p>
+  <div class="guias-grid fade-in">
+    <a class="guia-card" href="guias/como-catalogar-quadrinhos/">
+      <h3>Como catalogar quadrinhos</h3>
+      <p>Passo a passo: o que registrar, por onde começar e como manter o catálogo em dia.</p>
+    </a>
+    <a class="guia-card" href="guias/como-cadastrar-quadrinhos/">
+      <h3>Como cadastrar quadrinhos rápido</h3>
+      <p>Um a um, a série inteira em lote ou importando sua planilha do Excel.</p>
+    </a>
+    <a class="guia-card" href="guias/planilha-ou-programa-para-catalogar-hqs/">
+      <h3>Planilha ou programa?</h3>
+      <p>Até onde a planilha vai e quando um programa passa a valer a pena.</p>
+    </a>
+    <a class="guia-card" href="guias/programas-para-catalogar-quadrinhos/">
+      <h3>Programas para catalogar quadrinhos</h3>
+      <p>Planilha, serviços online ou programa no computador: como escolher.</p>
+    </a>
+  </div>
+</section>
+
 <section class="faq-section" id="faq">
   <div class="section-label">Dúvidas frequentes</div>
   <h2>Perguntas &amp; respostas</h2>
   <div class="faq-list fade-in">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Qual o melhor programa para catalogar quadrinhos? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Depende da coleção. Para uma lista pequena, uma planilha resolve. Para catalogar <strong>quadrinhos, HQs, gibis e mangás de qualquer editora</strong>, em português, com os dados no seu próprio computador e <strong>sem assinatura</strong>, o Sigen HQ é um programa para Windows que funciona offline e é <strong>grátis até 100 edições</strong>.
+        <br><br>
+        As perguntas que ajudam a escolher entre planilha, serviços online e programa no computador estão no guia <a href="guias/programas-para-catalogar-quadrinhos/">programas para catalogar quadrinhos</a>.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como catalogar minha coleção de quadrinhos? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        <strong>1.</strong> Separe as revistas por série e, dentro de cada série, por número.<br>
+        <strong>2.</strong> Registre primeiro o essencial de cada edição: série, número, editora e se você tem ou não.<br>
+        <strong>3.</strong> Cadastre séries inteiras de uma vez (Adicionar em Lote) em vez de edição por edição.<br>
+        <strong>4.</strong> Adicione as capas — de preferência em lote, a partir de uma pasta.<br>
+        <strong>5.</strong> Cadastre cada compra nova no mesmo dia e faça backup de tempos em tempos.
+        <br><br>
+        Passo a passo completo no guia <a href="guias/como-catalogar-quadrinhos/">como catalogar quadrinhos</a>.
+      </div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Como cadastrar quadrinhos rapidamente? <div class="faq-arrow">+</div></button>
+      <div class="faq-answer"><div class="faq-answer-inner">
+        Cadastre a <strong>série inteira em lote</strong>: informe a faixa de números e os dados comuns (editora, formato, idioma) uma única vez e marque as edições que você já tem — as outras viram sua lista de desejos. Se a coleção já estiver numa <strong>planilha do Excel</strong>, importe a planilha em vez de redigitar. Veja o guia <a href="guias/como-cadastrar-quadrinhos/">como cadastrar quadrinhos rápido</a>.
+      </div></div>
+    </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">Como funciona a compra e a ativação? <div class="faq-arrow">+</div></button>
@@ -1532,6 +1619,7 @@ footer{
   <ul class="footer-links">
     <li><a href="#funcionalidades">Funcionalidades</a></li>
     <li><a href="#download">Download</a></li>
+    <li><a href="guias/">Guias</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#changelog">Changelog</a></li>
     <li><a href="#contato">Contato</a></li>

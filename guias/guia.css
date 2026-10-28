@@ -1,0 +1,79 @@
+/* Estilo dos guias — mesmas cores, fontes, menu e rodapé da página principal */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0e0d;--paper:#f5f0e8;--paper-dark:#ece5d6;--red:#c8261a;--red-dark:#9e1c12;
+  --gold:#ffd700;--text:#1a1714;--muted:#6b6256;--border:rgba(15,14,13,0.13);--radius:4px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--text);font-size:17px;line-height:1.7;overflow-x:hidden;}
+
+/* menu (igual ao da página principal) */
+nav{position:sticky;top:0;z-index:100;background:var(--ink);display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.5rem,5vw,4rem);height:56px;border-bottom:3px solid var(--red);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--paper);letter-spacing:.05em;text-decoration:none;display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{width:28px;height:28px;background:var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--ink);font-weight:700;}
+.nav-logo span{color:var(--red);}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center;}
+.nav-links a{color:rgba(245,240,232,.6);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.ativo{color:var(--paper);}
+.nav-cta{background:var(--red) !important;color:var(--paper) !important;padding:.4rem 1.1rem;border-radius:var(--radius);}
+.nav-cta:hover{background:var(--red-dark) !important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--paper);border-radius:2px;}
+
+/* artigo */
+.artigo{max-width:760px;margin:0 auto;padding:clamp(2rem,6vw,4rem) clamp(1.25rem,5vw,2rem) 4rem;}
+.trilha{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;}
+.trilha a{color:var(--muted);}
+.rotulo{font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+.rotulo::before{content:'';display:block;width:24px;height:2px;background:var(--red);}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.02;letter-spacing:.02em;color:var(--ink);margin-bottom:1rem;}
+.lead{font-size:1.12rem;color:var(--muted);margin-bottom:2rem;}
+.artigo h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.05;letter-spacing:.02em;color:var(--ink);margin:2.5rem 0 .75rem;}
+.artigo h3{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.03em;color:var(--ink);margin:1.75rem 0 .4rem;}
+.artigo p{margin-bottom:1rem;}
+.artigo ul,.artigo ol{margin:0 0 1.2rem 1.3rem;}
+.artigo li{margin-bottom:.45rem;}
+.artigo a{color:var(--red);}
+.artigo strong{color:var(--ink);}
+.caixa{background:var(--paper-dark);border-left:4px solid var(--red);padding:1rem 1.25rem;margin:1.5rem 0;border-radius:var(--radius);}
+.caixa p:last-child{margin-bottom:0;}
+.atualizado{font-size:.82rem;color:var(--muted);margin-bottom:2rem;}
+table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.92rem;}
+th,td{border:1px solid var(--border);padding:.6rem .7rem;text-align:left;vertical-align:top;}
+th{background:var(--ink);color:var(--paper);font-weight:500;}
+tr:nth-child(even) td{background:rgba(15,14,13,.03);}
+.tabela-rolagem{overflow-x:auto;}
+
+/* chamada para baixar */
+.cta{background:var(--ink);color:var(--paper);border-radius:6px;padding:1.75rem;margin:2.5rem 0 1rem;border-top:3px solid var(--red);}
+.cta h2{color:var(--paper) !important;margin-top:0 !important;}
+.cta p{color:rgba(245,240,232,.75);}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:var(--paper) !important;text-decoration:none;font-weight:500;
+  font-size:.95rem;padding:.8rem 1.8rem;border-radius:var(--radius);transition:background .2s;}
+.btn:hover{background:var(--red-dark);}
+
+/* outros guias */
+.outros{margin-top:3rem;padding-top:1.5rem;border-top:2px solid var(--ink);}
+.outros ul{list-style:none;margin-left:0;}
+.outros li{margin-bottom:.6rem;}
+.cartoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.5rem;}
+.cartao{display:block;background:#fff;border:1px solid var(--border);border-radius:6px;padding:1.25rem 1.4rem;text-decoration:none;color:var(--text) !important;transition:transform .15s,box-shadow .15s;}
+.cartao:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.cartao h2{font-size:1.5rem !important;margin:0 0 .35rem !important;color:var(--ink);}
+.cartao p{color:var(--muted);font-size:.92rem;margin:0;}
+
+footer{background:#070605;padding:2rem clamp(1.5rem,5vw,4rem);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:3px solid var(--red);}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--paper);letter-spacing:.05em;}
+.footer-logo span{color:var(--red);}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:.78rem;color:rgba(245,240,232,.3);text-decoration:none;}
+.footer-links a:hover{color:var(--paper);}
+.footer-copy{font-size:.75rem;color:rgba(245,240,232,.25);}
+
+@media(max-width:660px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:56px;inset-inline:0;background:var(--ink);padding:1.5rem 2rem;gap:1.5rem;border-top:2px solid var(--red);z-index:99;}
+  footer{flex-direction:column;text-align:center;}
+}
