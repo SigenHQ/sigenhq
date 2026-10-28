@@ -1,5 +1,5 @@
 {
-  "version": "1.2.7",
-  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.7.exe",
-  "notes": "Botoes Salvar/Cancelar sempre visiveis em telas menores (ex.: 1366x768) e o programa nao fica mais sem responder ao salvar varias edicoes em sequencia. Instale por cima: sua colecao continua intacta."
+  "version": "1.2.8",
+  "download_url": "https://github.com/SigenHQ/sigenhq/releases/latest/download/SigenHQ_Setup_1.2.8.exe",
+  "notes": "Navegacao Anterior/Seguinte mais rapida e sem pular edicoes; capa trocada aparece na hora; menos uso de memoria. Instale por cima: sua colecao continua intacta."
 }
